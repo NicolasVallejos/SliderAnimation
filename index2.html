@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+   
+    <div id="appA">
+        <div id="hero">
+
+            <input type="range" id="position-range-A" min="0" max="127" value="0">
+
+          </div>
+          
+    </div>
+
+
+   
+    <div id="appB">
+        <div id="hero">
+
+            <input type="range" id="position-range-B" min="0" max="127" value="0">
+
+          </div>
+          
+    </div>
+   
+    <div id="appC">
+        <div id="hero">
+
+            <input type="range" id="position-range-C" min="0" max="127" value="0">
+
+          </div>
+          
+    </div>
+
+
+
+    <script type="module">
+        // Importa la biblioteca de particlesCursor
+        import { particlesCursor } from 'https://unpkg.com/threejs-toys@0.0.8/build/threejs-toys.module.cdn.min.js';
+    
+        document.addEventListener('DOMContentLoaded', () => {
+            // Inicializa particlesCursor para controlar app
+            const pcAppA = particlesCursor({
+                el: document.getElementById('appA'),
+                gpgpuSize: 512,
+            });
+    
+            // Inicializa particlesCursor para controlar appB
+            const pcAppB = particlesCursor({
+                el: document.getElementById('appB'),
+                gpgpuSize: 512,
+            });
+    
+            // Inicializa particlesCursor para controlar appC
+            const pcAppC = particlesCursor({
+                el: document.getElementById('appC'),
+                gpgpuSize: 512,
+            });
+    
+            // Escucha el evento 'mousemove' para actualizar los valores de los inputs para app
+            document.addEventListener('mousemove', (event) => {
+                const mouseX = event.clientX / window.innerWidth;
+                
+                // Actualiza el valor del rango de posición para app
+                const positionValueAppA = Math.floor(mouseX * 127);
+                document.getElementById('position-range-A').value = positionValueAppA;
+                pcAppA.uniforms.uMousePos.value.set(mouseX, 0);
+            });
+    
+            // Escucha el evento 'mousemove' para actualizar los valores de los inputs para appB
+            document.addEventListener('mousemove', (event) => {
+                const mouseX = event.clientX / window.innerWidth;
+                
+                // Actualiza el valor del rango de posición para appB
+                const positionValueAppB = Math.floor(mouseX * 127);
+                document.getElementById('position-range-B').value = positionValueAppB;
+                pcAppB.uniforms.uMousePos.value.set(mouseX, 0);
+            });
+    
+            // Escucha el evento 'mousemove' para actualizar los valores de los inputs para appC
+            document.addEventListener('mousemove', (event) => {
+                const mouseX = event.clientX / window.innerWidth;
+                
+                // Actualiza el valor del rango de posición para appC
+                const positionValueAppC = Math.floor(mouseX * 127);
+                document.getElementById('position-range-C').value = positionValueAppC;
+                pcAppC.uniforms.uMousePos.value.set(mouseX, 0);
+            });
+        });
+    </script>
+
+
+
+
+
+</body>
+</html>
